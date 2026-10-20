@@ -1,0 +1,238 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Design tokens — customize centrally */
+    --background: 0 0% 100%;
+    --foreground: 224 71% 4%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 224 71% 4%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71% 4%;
+
+    /* Deep navy primary */
+    --primary: 230 70% 18%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 224 71% 4%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+
+    /* Teal accent */
+    --accent: 172 66% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 230 70% 18%;
+
+    --radius: 0.5rem;
+
+    /* Status colors */
+    --status-available: 142 71% 45%;
+    --status-occupied: 0 84% 60%;
+    --status-upcoming: 38 92% 50%;
+    --status-closed: 220 9% 60%;
+    --status-maintenance: 25 95% 53%;
+    --status-unknown: 220 9% 65%;
+
+    /* University brand */
+    --university-primary: 230 70% 18%;
+    --university-accent: 172 66% 50%;
+    --university-surface: 220 30% 98%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Focus visible styles */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2;
+  }
+}
+
+@layer components {
+  /* Status badge base styles */
+  .status-badge {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold leading-none;
+  }
+
+  .status-available {
+    @apply bg-emerald-50 text-emerald-700 border border-emerald-200;
+  }
+
+  .status-occupied {
+    @apply bg-red-50 text-red-700 border border-red-200;
+  }
+
+  .status-upcoming {
+    @apply bg-amber-50 text-amber-700 border border-amber-200;
+  }
+
+  .status-closed {
+    @apply bg-slate-100 text-slate-600 border border-slate-200;
+  }
+
+  .status-maintenance {
+    @apply bg-orange-50 text-orange-700 border border-orange-200;
+  }
+
+  .status-unknown {
+    @apply bg-gray-100 text-gray-500 border border-gray-200;
+  }
+
+  /* Room card */
+  .room-card {
+    @apply bg-white border border-border rounded-lg p-4 hover:border-primary/30 hover:shadow-md transition-all duration-200 cursor-pointer;
+  }
+
+  .room-card:focus-visible {
+    @apply ring-2 ring-primary ring-offset-2;
+  }
+
+  /* Navigation */
+  .nav-link {
+    @apply flex items-center gap-2 px-3 py-2 text-sm font-medium text-muted-foreground rounded-md hover:text-foreground hover:bg-secondary transition-colors;
+  }
+
+  .nav-link.active {
+    @apply text-foreground bg-secondary;
+  }
+
+  /* Page header */
+  .page-header {
+    @apply border-b border-border bg-background sticky top-0 z-40;
+  }
+
+  /* Search input */
+  .search-input {
+    @apply w-full pl-10 pr-4 py-3 text-sm border border-input rounded-lg bg-background placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all;
+  }
+
+  /* Timetable */
+  .timetable-hour {
+    @apply text-xs text-muted-foreground font-mono w-14 flex-shrink-0 pt-0.5;
+  }
+
+  .timetable-slot {
+    @apply relative flex-1 border-b border-border/50 min-h-[3rem];
+  }
+
+  .timetable-event {
+    @apply absolute inset-x-1 rounded text-xs font-medium px-2 py-1 overflow-hidden z-10;
+  }
+
+  /* Skeleton loader */
+  .skeleton {
+    @apply animate-pulse bg-gradient-to-r from-slate-100 via-slate-200 to-slate-100 bg-[length:200%_100%];
+    animation: shimmer 2s linear infinite;
+  }
+
+  /* Card grid */
+  .room-grid {
+    @apply grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+  }
+
+  /* Empty state */
+  .empty-state {
+    @apply flex flex-col items-center justify-center text-center py-16 px-4;
+  }
+
+  /* Day selector tab */
+  .day-tab {
+    @apply px-4 py-2 text-sm font-medium text-muted-foreground border-b-2 border-transparent hover:text-foreground hover:border-border transition-colors whitespace-nowrap;
+  }
+
+  .day-tab.active {
+    @apply text-primary border-primary;
+  }
+
+  .day-tab.today {
+    @apply font-semibold;
+  }
+
+  /* Filter pill */
+  .filter-pill {
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-primary/10 text-primary border border-primary/20 rounded-full;
+  }
+}
+
+@layer utilities {
+  /* University colors */
+  .bg-university { @apply bg-[hsl(var(--university-primary))]; }
+  .text-university { @apply text-[hsl(var(--university-primary))]; }
+
+  /* Scrollbar */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 100px;
+  }
+
+  /* Horizontal scroll for timetable */
+  .timetable-scroll {
+    @apply overflow-x-auto scrollbar-thin;
+  }
+
+  /* Fade in animation */
+  .animate-fade-in {
+    animation: fade-in 0.3s ease-out;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print { display: none !important; }
+  .page-header { position: static !important; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .animate-shimmer,
+  .skeleton {
+    animation: none;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}
